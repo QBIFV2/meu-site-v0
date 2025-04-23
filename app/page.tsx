@@ -288,7 +288,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <MessageSquare className="h-5 w-5 text-purple-600" />
-                    <span>contato@qbistudio.com.br</span>
+                    <span>qbistudioai@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-purple-600" />
