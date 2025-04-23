@@ -78,7 +78,7 @@ const ContactForm = () => {
         <input
           type="hidden"
           name="_next"
-          value="https://qbifv2.github.io/meu-site-v0/obrigado.html"
+          value="https://qbifv2.github.io/meu-site-v0/aplicativo/obrigado.html"
         />
 
         {/* Botão de Envio */}
