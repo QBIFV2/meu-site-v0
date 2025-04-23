@@ -292,7 +292,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-purple-600" />
-                    <span>+55 (11) 9999-9999</span>
+                    <span>+55 (17) 99101-2920</span>
                   </div>
                 </div>
               </div>
