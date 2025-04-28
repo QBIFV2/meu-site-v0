@@ -275,82 +275,126 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contato" className="w-full py-12 md:py-24 lg:py-32 bg-purple-50">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div className="flex flex-col justify-center space-y-4">
+        import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { MessageSquare, Users } from "lucide-react";
+
+export function Contato() {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_43qg60x", // Seu Service ID
+        "template_k5t68f8", // Seu Template ID
+        form.current,
+        "fCiBZXTwUqmhQc2km" // Seu Public Key (ex-User ID)
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Mensagem enviada com sucesso!");
+          form.current.reset();
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Erro ao enviar mensagem. Tente novamente.");
+        }
+      );
+  };
+
+  return (
+
+
+    <section id="contato" className="w-full py-12 md:py-24 lg:py-32 bg-purple-50">
+      <div className="container px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Vamos Conversar</h2>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Estamos prontos para entender seu negócio e desenvolver a solução de IA ideal para suas necessidades
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="h-5 w-5 text-purple-600" />
+                <span>qbistudioai@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-purple-600" />
+                <span>+55 (17) 99101-2920</span>
+              </div>
+            </div>
+          </div>
+          <form ref={form} onSubmit={sendEmail} className="flex flex-col space-y-4 rounded-lg border bg-white p-6 shadow-sm">
+            <div className="grid gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Vamos Conversar</h2>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Estamos prontos para entender seu negócio e desenvolver a solução de IA ideal para suas necessidades
-                  </p>
+                  <label htmlFor="first-name" className="text-sm font-medium leading-none">
+                    Nome
+                  </label>
+                  <input
+                    id="first-name"
+                    name="user_name"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    placeholder="Seu nome"
+                    required
+                  />
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="h-5 w-5 text-purple-600" />
-                    <span>qbistudioai@gmail.com</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-purple-600" />
-                    <span>+55 (17) 99101-2920</span>
-                  </div>
+                <div className="space-y-2">
+                  <label htmlFor="last-name" className="text-sm font-medium leading-none">
+                    Empresa
+                  </label>
+                  <input
+                    id="last-name"
+                    name="user_company"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    placeholder="Sua empresa"
+                  />
                 </div>
               </div>
-              <div className="flex flex-col space-y-4 rounded-lg border bg-white p-6 shadow-sm">
-                <div className="grid gap-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="first-name"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Nome
-                      </label>
-                      <input
-                        id="first-name"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="Seu nome"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="last-name"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Empresa
-                      </label>
-                      <input
-                        id="last-name"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="Sua empresa"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="seu@email.com"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Mensagem
-                    </label>
-                    <textarea
-                      id="message"
-                      className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Descreva seu projeto ou necessidade"
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium leading-none">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="user_email"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  placeholder="seu@email.com"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium leading-none">
+                  Mensagem
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  placeholder="Descreva seu projeto ou necessidade"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-md bg-purple-600 px-4 py-2 text-white hover:bg-purple-700 transition-colors"
+              >
+                Enviar Mensagem
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
                     />
                   </div>
                 </div>
